@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.muhendisbey</groupId>
     <artifactId>docker-java-api-example</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>docker-java-api-example</name>
     <description>docker-java-api-example</description>
     <properties>
@@ -43,6 +43,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+<!--        Swagger APIs-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
         </dependency>
     </dependencies>
 
