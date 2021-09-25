@@ -2,11 +2,10 @@ package com.muhendisbey.dockerjavaapiexample.service;
 
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.command.CreateContainerResponse;
-import com.github.dockerjava.api.model.Bind;
+import com.github.dockerjava.api.command.InspectContainerResponse;
+import com.github.dockerjava.api.command.KillContainerCmd;
 import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.PortBinding;
-import com.github.dockerjava.core.DefaultDockerClientConfig;
-import com.github.dockerjava.core.DockerClientBuilder;
 import com.muhendisbey.dockerjavaapiexample.dto.CreateDockerContainerDTO;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +35,32 @@ public class DockerContainerService
                 .withName(dto.getContainerName())
                 .withHostName(dto.getHostname())
                 .withPortBindings(PortBinding.parse(
-                        dto.getPortBinding() + ":" + dto.getPortBinding().getOutParam()
-                        ))
+                        dto.getPortBinding()))
                 .exec();
+    }
+
+    public void startContainer(String id)
+    {
+        _dockerClient.startContainerCmd(id).exec();
+    }
+
+    public void stopContainer(String id)
+    {
+        _dockerClient.stopContainerCmd(id);
+    }
+
+    public void killContainer(String id)
+    {
+        _dockerClient.killContainerCmd(id);
+    }
+
+    public InspectContainerResponse inspectContianer(String id)
+    {
+        return _dockerClient.inspectContainerCmd(id).exec();
+    }
+
+    public void takeSnapshot(String id)
+    {
+        throw new UnsupportedOperationException();
     }
 }

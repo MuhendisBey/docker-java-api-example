@@ -1,6 +1,6 @@
 package com.muhendisbey.dockerjavaapiexample.controller;
 
-import com.github.dockerjava.api.command.CreateContainerResponse;
+import com.github.dockerjava.api.command.*;
 import com.github.dockerjava.api.model.Container;
 import com.muhendisbey.dockerjavaapiexample.dto.CreateDockerContainerDTO;
 import com.muhendisbey.dockerjavaapiexample.service.DockerContainerService;
@@ -30,4 +30,35 @@ public class DockerContainerController
     {
         return _dockerContainerManagementService.createContainer(dto);
     }
+
+    @PostMapping("container/{id}/start")
+    void startContainer(@PathVariable String id)
+    {
+        _dockerContainerManagementService.startContainer(id);
+    }
+
+    @PostMapping("container/{id}/stop")
+    void stopContainer(@PathVariable String id)
+    {
+        _dockerContainerManagementService.stopContainer(id);
+    }
+
+    @PostMapping("container/{id}/kill")
+    void killContainer(@PathVariable String id)
+    {
+        _dockerContainerManagementService.killContainer(id);
+    }
+
+    @GetMapping("container/{id}")
+    InspectContainerResponse inspectContianer(@PathVariable String id)
+    {
+        return _dockerContainerManagementService.inspectContianer(id);
+    }
+
+    @PutMapping("container/{id}/take-snapshot")
+    void takeSnapshot(@PathVariable String id)
+    {
+        _dockerContainerManagementService.takeSnapshot(id);
+    }
+
 }

@@ -8,6 +8,6 @@ public class CreateDockerContainerDTO
     String imageName;
     String containerName;
     String hostname;
-    InOutDockerParameter portBinding;
-    InOutDockerParameter volumeBinding;
+    String portBinding;
+    String volumeBinding;
 }
