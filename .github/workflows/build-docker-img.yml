@@ -54,7 +54,7 @@ jobs:
 
     - name: List all built docker images
       run: |
-        docker images | grep $DOCKER_HUB_USERNAME
+        docker images | grep ${{ env.DOCKER_HUB_USERNAME }}
 
     - name: Push all of docker images
       run: |
