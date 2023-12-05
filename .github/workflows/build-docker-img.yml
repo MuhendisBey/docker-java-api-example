@@ -1,0 +1,52 @@
+name: Docker Image CI
+  
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  TEST: test
+  DOCKER_HUB_USERNAME: ${{ vars.DOCKER_HUB_UNAME }}
+  REGISTRYNAME: ${{ vars.REGISTRYNAME }}
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Test Point for docker config before login
+      run: |
+        echo "See below uncencrypted data =>"
+        cat /home/runner/.docker/config.json
+
+    - name: Docker Hub Login
+      env:
+        UNAME: ${{ vars.DOCKER_HUB_UNAME }}
+        PASWWD: ${{ secrets.DOCKER_HUB_PASSWD }}
+      run: |
+        echo "Login into the docker hub"
+          docker login -u "$UNAME" -p "$PASWWD"
+
+    - name: Test Point for docker config after login
+      run: |
+        echo "See below uncencrypted data =>"
+        cat /home/runner/.docker/config.json
+        
+    - name: Build Docker All Images
+      id: build-all-docker-images
+      run: |
+       echo "Building Docker images ==> "
+       docker build --build-arg="JAR_FILE_NAME=docker-java-api-example-0.0.1" . -t "${DOCKER_HUB_USERNAME}/${REGISTRYNAME}"
+
+    - name: List all built docker images
+      run: |
+        docker images | grep $DOCKER_HUB_USERNAME
+
+    - name: Push all of docker images
+      run: |
+        docker-compose push
+              
