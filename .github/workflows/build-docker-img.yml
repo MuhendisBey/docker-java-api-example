@@ -35,7 +35,12 @@ jobs:
       run: |
         echo "See below uncencrypted data =>"
         cat /home/runner/.docker/config.json
-        
+  
+      # Setting up Docker Buildx with docker-container driver is required
+      # at the moment to be able to use a subdirectory with Git context
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
     - name: Build and Push Docker All Images
       uses: docker/build-push-action@v5
       with:
