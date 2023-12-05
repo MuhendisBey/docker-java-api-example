@@ -45,8 +45,8 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        context: .
-        file: "{{defaultContext}}/Dockerfile"
+        context: "{{defaultContext}}"
+        file: Dockerfile
         build-args: "JAR_FILE_NAME=docker-java-api-example-0.0.1"
         tags: ${{ env.DOCKER_HUB_USERNAME }}/${{ env.REGISTRYNAME }}:latest
 
