@@ -40,7 +40,7 @@ jobs:
       id: build-all-docker-images
       run: |
        echo "Building Docker images ==> "
-       docker build --build-arg="JAR_FILE_NAME=docker-java-api-example-0.0.1" . -t "${DOCKER_HUB_USERNAME}/${REGISTRYNAME}"
+       docker build --build-arg="JAR_FILE_NAME=docker-java-api-example-0.0.1" . -t "${DOCKER_HUB_USERNAME}/${REGISTRYNAME}" -f ./Dockerfile
 
     - name: List all built docker images
       run: |
